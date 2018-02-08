@@ -1,0 +1,181 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+
+using namespace std;
+
+ofstream fout{ "错题本.txt", ios::app };
+
+long long int x, y, jjcc, esc, fenShu = 100, jianFen, daAn, daAn2, da, num, num2, Da;
+
+void wct(long long int f, long long int shu1, long long int shu2, long long int cuojie, long long int zhengjie, long long int xyu, long long int dyu)
+{
+	fout << "题目：";
+	if (f == 0)
+	{
+		fout << shu1 << "＋" << shu2 << endl;
+		fout << "你的答案：" << cuojie << " | 正确答案：" << zhengjie << endl << endl;
+	}
+	else if (f == 1)
+	{
+		fout << shu1 << "－" << shu2 << endl;
+		fout << "你的答案：" << cuojie << " | 正确答案：" << zhengjie << endl << endl;
+	}
+	else if (f == 2)
+	{
+		fout << shu1 << "×" << shu2 << endl;
+		fout << "你的答案：" << cuojie << " | 正确答案：" << zhengjie << endl << endl;
+	}
+	else
+	{
+		fout << shu1 << "÷" << shu2 << endl;
+		fout << "你的答案：" << cuojie << "……" << xyu << " | 正确答案：" << zhengjie << "……" << dyu << endl << endl;
+
+	}
+}
+
+void jiaFa()
+{
+	for (int i = 0; i < x; ++i)
+	{
+		num = rand() % y;
+		num2 = rand() % y;
+		cout << num << "＋";
+		cout << num2 << "=";
+		cin >> daAn;
+		if (daAn != (num + num2))
+		{
+			da = num + num2;
+			cout << "\n错误！\n"
+				<< "正确答案：" << da << "\n\n";
+			fenShu -= jianFen;
+			wct(jjcc, num, num2, daAn, da, 0, 0);
+		}
+		else
+			cout << "\n正确\n\n";
+	}
+}
+
+void jianFa()
+{
+	for (int i = 0; i < x; ++i)
+	{
+		do
+		{
+			num = rand() % (y - (y / 2));
+			num2 = rand() % (y / 2);
+		} while (num < num2);
+		cout << num << "－";
+		cout << num2 << "=";
+		cin >> daAn;
+		if (daAn != (num - num2))
+		{
+			da = num - num2;
+			cout << "\n错误！\n"
+				<< "正确答案：" << da << "\n\n";
+			fenShu -= jianFen;
+			wct(jjcc, num, num2, daAn, da, 0, 0);
+		}
+		else
+			cout << "\n正确\n\n";
+	}
+}
+
+void chengFa()
+{
+	for (int i = 0; i < x; ++i)
+	{
+		do
+		{
+			num = rand() % y;
+			num2 = rand() % y;
+		} while (num == 0 || num2 == 0);
+		cout << num << "×";
+		cout << num2 << "=";
+		cin >> daAn;
+		if (daAn != (num * num2))
+		{
+			da = num * num2;
+			cout << "\n错误！\n"
+				<< "正确答案：" << da << "\n\n";
+			fenShu -= jianFen;
+			wct(jjcc, num, num2, daAn, da, 0, 0);
+		}
+		else
+			cout << "\n正确\n\n";
+	}
+}
+
+void chuFa()
+{
+	for (int i = 0; i < x; ++i)
+	{
+		do
+		{
+			num = rand() % y;
+			num2 = (rand() % (y / 2)) + 1;
+		} while (num < num2);
+		cout << num << "÷";
+		cout << num2 << "=";
+		cin >> daAn;
+		cout << "余数:";
+		cin >> daAn2;
+
+		if (daAn != (num / num2) || daAn2 != (num % num2))
+		{
+			da = num / num2;
+			Da = num % num2;
+
+			cout << "\n错误！\n"
+				<< "正确答案：" << da << "……" << Da << "\n\n";
+			fenShu -= jianFen;
+			wct(jjcc, num, num2, daAn, da, daAn2, Da);
+		}
+		else
+			cout << "\n正确\n\n";
+	}
+}
+
+int main()
+{
+	cout << "\n－－－－－－－－－－－－－－－数学练习系统－－－－－－－－－－－－－－－\n"
+		<< "\n做加法题请输\"0\"，做减法题请输\"1\"，做乘法题请输\"2\"，做除法题请输\"3\"：";
+	cin >> jjcc;
+	if (jjcc > 3)
+	{
+		cout << "\n无法识别！\n输入\"e\"退出～～" << endl;
+		cin >> esc;
+		return 0;
+	}
+
+	cout << "\n输入题目个数：";
+	cin >> x;
+	cout << "\n输入出题范围：0～";
+	cin >> y;
+	cout << "\n稍等~~\n"
+		<< "\n－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－\n"
+		<< endl;
+
+	jianFen = 100 / x;
+
+	switch (jjcc)
+	{
+
+	case 0:
+		jiaFa();
+		break;
+	case 1:
+		jianFa();
+		break;
+	case 2:
+		chengFa();
+		break;
+	case 3:
+		chuFa();
+		break;
+	}
+	cout << "得分：" << fenShu << endl;
+
+	system("pause");
+	return 0;
+}
