@@ -1,0 +1,126 @@
+
+#include <iostream>
+#include <cstdlib>
+
+int main()
+{
+	
+	using namespace std;
+	
+	int x, y, jjcc, esc;
+	int fenShu = 100, jianFen;
+	char stop;
+	
+	
+	cout<<"\n－－－－－－－－－－－－－－－数学练习系统－－－－－－－－－－－－－－－\n"
+			  <<"\n做加法题请输\"0\"，做减法题请输\"1\"，做乘法题请输\"2\"，做除法题请输\"3\"：";
+	cin>>jjcc;
+	if (jjcc > 3)
+	{
+		cout<<"\n无法识别！\n输入\"e\"退出～～"<<endl;
+		cin>>esc;
+		return 0;
+	}
+	
+	cout<<"\n输入题目个数：";
+	cin>>x;
+	cout<<"\n输入出题范围：0～";
+	cin>>y;
+	cout<<"\n稍等~~\n"
+			   <<"\n－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－\n"
+	           <<endl;
+	 
+	 jianFen = 100 / x;
+	 
+	 int daAn,daAn2,da;
+	 int num, num2;
+	 int Da;
+	 
+	switch (jjcc)
+	{
+		
+		case 0:
+			for ( int i = 0 ; i < x ; ++i )
+			{
+				num = rand() % y;
+				cout<<num<<"+";
+				num2 = rand() % y;
+				cout<<num2<<"=";
+				cin>>daAn;
+				if (daAn != (num + num2))
+				{
+					da = num + num2;
+					cout<<"\n错误！\n"
+					          <<"正确答案："<<da<<"\n\n";
+					fenShu -= jianFen;
+				}else
+					cout<<"\n正确\n\n";
+			}
+			break;
+		case 1:
+			for ( int i = 0; i < x ; ++i )
+			{
+				num = rand() % (y-(y / 2));
+				cout<<num<<"-";
+				num2 = rand() % (y /2);
+				cout<<num2<<"=";
+				cin>>daAn;
+				if (daAn != (num - num2))
+				{
+					da = num - num2;
+					cout<<"\n错误！\n"
+					          <<"正确答案："<<da<<"\n\n";
+					fenShu -= jianFen;
+				}else
+					cout<<"\n正确\n\n";
+			}
+			break;
+		case 2:
+			for ( int i = 0 ; i < x ; ++i )
+			{
+				num = rand() % y;
+				cout<<num<<"X";
+				num2 = rand() % y;
+				cout<<num2<<"=";
+				cin>>daAn;
+				if (daAn != (num * num2))
+				{
+					da = num * num2;
+					cout<<"\n错误！\n"
+					           <<"正确答案："<<da<<"\n\n";
+					fenShu -= jianFen;
+				}else
+					cout<<"\n正确\n\n";
+			}
+			break;
+		case 3:
+			for ( int i = 0 ; i < x ; ++i )
+			{
+				num = rand() % y;
+				cout<<num<<"/";
+				num2 = (rand() % (y / 2))+1;
+				cout<<num2<<"=";
+				cin>>daAn;
+				cout<<"余数:";
+				cin>>daAn2;
+
+				if (daAn != (num / num2) && daAn2 != (num % num2))
+				{
+					da = num / num2;
+					Da = num % num2;
+					
+					cout<<"\n错误！\n"
+					          <<"正确答案："<<da<<"......"<<Da<<"\n\n";
+					fenShu -= jianFen;
+				}else
+					cout<<"\n正确\n\n";
+			}
+			break;
+	}
+	cout<<"得分："<<fenShu<<endl;
+	cin>>stop;
+}
+		
+		
+
+		
